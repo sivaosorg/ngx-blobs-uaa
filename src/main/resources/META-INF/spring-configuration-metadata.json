@@ -1,0 +1,19 @@
+{
+  "properties": [
+    {
+      "name": "sivaos.uaa.client-host",
+      "type": "java.lang.String",
+      "description": "Description for sivaos.uaa.client-host."
+    },
+    {
+      "name": "sivaos.uaa.client-secret",
+      "type": "java.lang.String",
+      "description": "Description for sivaos.uaa.client-secret."
+    },
+    {
+      "name": "sivaos.uaa.client-id",
+      "type": "java.lang.String",
+      "description": "Description for sivaos.uaa.client-id."
+    }
+  ]
+}
