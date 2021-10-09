@@ -144,10 +144,10 @@ dependencies {
 
 
     /* begin::Support documentation */
-    compile "org.apache.poi:poi:3.17"
-    compile "org.apache.poi:poi-ooxml:3.17"
     compile group: 'org.apache.poi', name: 'poi', version: '3.9'
     compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.9'
+    compile "org.apache.poi:poi:3.17"
+    compile "org.apache.poi:poi-ooxml:3.17"
     compile group: 'org.apache.commons', name: 'commons-csv', version: '1.5'
     compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13.1'
     compile group: 'com.pdfcrowd', name: 'pdfcrowd', version: '4.3.5'
