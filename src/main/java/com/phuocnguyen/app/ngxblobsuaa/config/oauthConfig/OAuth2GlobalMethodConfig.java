@@ -10,6 +10,7 @@ import com.sivaos.Service.SIVAOSServiceImplement.GlobalExceptionServiceImplement
 import com.sivaos.Service.SIVAOSServiceImplement.SIVAOSAuthenticationServiceImplement;
 import com.sivaos.Service.SIVAOSServiceImplement.SIVAOSMailServiceImplement;
 import com.sivaos.Utils.ConfigGlobalUtils;
+import com.sivaos.config.propertiesConfig.AuthenticationProperties;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -227,6 +228,12 @@ public class OAuth2GlobalMethodConfig extends GlobalMethodSecurityConfiguration 
     @Resource(name = "ngxUsersBaseService")
     public NgxUsersBaseService ngxUsersBaseService() {
         return new NgxUsersBaseServiceImpl();
+    }
+
+    @Bean
+    @Primary
+    public AuthenticationProperties authenticationProperties() {
+        return new AuthenticationProperties();
     }
 
     private static class OAuth2AccessTokenVariable {

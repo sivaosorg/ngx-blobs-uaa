@@ -11,7 +11,9 @@ sivaos:
     license: sivaos 1.1
     license-url: https://swagger.io/license/
     version: v.1.1
-  uaa:
-    clientId: "sivaosUser"
-    clientSecret: "sivaosU"
-    clientHost: "localhost:8083"
+  authentication:
+    client-id: "sivaosUser"
+    client-secret: "sivaosU"
+    host: "localhost:8083"
+    protocol: "http://"
+    enable: true

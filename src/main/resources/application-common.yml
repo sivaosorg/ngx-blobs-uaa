@@ -57,7 +57,6 @@ spring:
 sivaos:
   parts:
     upload-dir: roots
-# Hibernate Log Level
 logging:
   level:
     root: INFO

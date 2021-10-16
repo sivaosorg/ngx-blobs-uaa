@@ -23,7 +23,6 @@ spring:
       master:
         name: sivaos
       host-and-port: 13.232.155.79:26379;13.232.155.88:26379;13.232.154.78:26379
-# Hibernate Log levels
 logging:
   pattern:
     console: "%clr(%d{yy-MM-dd E HH:mm:ss.SSS}){blue} %clr(%-5p) %clr(%logger{0}){blue} %clr(%m){faint}%n"
