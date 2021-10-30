@@ -2,6 +2,8 @@ package com.phuocnguyen.app.ngxblobsuaa.config.oauthConfig;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ngxsivaos.services.NgxSOrgHelperBaseService;
+import com.ngxsivaos.services.impls.NgxSOrgHelperBaseServiceImpl;
 import com.phuocnguyen.app.ngxblobssrv.service.*;
 import com.phuocnguyen.app.ngxblobssrv.service.serviceImpl.*;
 import com.sivaos.Configurer.SIVAJDBCConnectAutomation.SIVAJDBCConnectConfigurer;
@@ -234,6 +236,13 @@ public class OAuth2GlobalMethodConfig extends GlobalMethodSecurityConfiguration 
     @Primary
     public AuthenticationProperties authenticationProperties() {
         return new AuthenticationProperties();
+    }
+
+    @Bean
+    @Primary
+    @Resource(name = "ngxSOrgHelperBaseService")
+    public NgxSOrgHelperBaseService ngxSOrgHelperBaseService() {
+        return new NgxSOrgHelperBaseServiceImpl();
     }
 
     private static class OAuth2AccessTokenVariable {
