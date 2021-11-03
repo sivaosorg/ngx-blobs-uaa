@@ -245,6 +245,20 @@ public class OAuth2GlobalMethodConfig extends GlobalMethodSecurityConfiguration 
         return new NgxSOrgHelperBaseServiceImpl();
     }
 
+    @Bean
+    @Primary
+    @Resource(name = "ngxUsersDetailsBaseService")
+    public NgxUsersDetailsBaseService ngxUsersDetailsBaseService() {
+        return new NgxUsersDetailsBaseServiceImpl();
+    }
+
+    @Bean
+    @Primary
+    @Resource(name = "ngxUsersCallbackBaseService")
+    public NgxUsersCallbackBaseService ngxUsersCallbackBaseService() {
+        return new NgxUsersCallbackBaseServiceImpl();
+    }
+
     private static class OAuth2AccessTokenVariable {
         private static final String AUTHENTICATION = "Authorization";
     }
