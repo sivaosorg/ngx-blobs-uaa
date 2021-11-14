@@ -1,10 +1,9 @@
 package com.phuocnguyen.app.ngxblobsuaa.controller;
 
 import com.phuocnguyen.app.ngxblobssrv.controllers.NgxBaseController;
+import com.sivaos.Model.ObjectEnumeration.Original.Privileges;
 import com.sivaos.Model.Response.SIVAResponseDTO;
 import com.sivaos.Utils.LoggerUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +16,14 @@ import javax.annotation.PostConstruct;
 
 import static com.ngxsivaos.variable.RoutesApiVariable.ROUTES_API_USER_SELF;
 
+@SuppressWarnings({"FieldCanBeLocal"})
 @RestController
 @RequestMapping(value = ROUTES_API_USER_SELF)
 public class UsersSelfController extends NgxBaseController {
 
-    private static final Logger logger = LoggerFactory.getLogger(UsersSelfController.class);
-
     @Value("${spring.profiles.active}")
     private String profileActive;
+
 
     @PostConstruct
     public void init() {
@@ -38,6 +37,8 @@ public class UsersSelfController extends NgxBaseController {
     ResponseEntity<?> findSelfInfo() {
         logger.info("Json auth request: {}", LoggerUtils.toJson(authSecuritiesContextRequest));
         logger.info("Users request: {}", LoggerUtils.toJson(userRequest));
+        logger.info("User has permission: {}", LoggerUtils.toJson(this.userRequest.getPrivileges()));
+        logger.info("User has read: {}", this.ngxCommonService.isUserHasPermission(this.userRequest, Privileges.IS_APPEND_TO));
         return new ResponseEntity<>(SIVAResponseDTO.buildSIVAResponse(userRequest), HttpStatus.OK);
     }
 }

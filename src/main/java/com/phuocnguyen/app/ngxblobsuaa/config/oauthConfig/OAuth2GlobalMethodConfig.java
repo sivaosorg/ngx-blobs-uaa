@@ -259,6 +259,7 @@ public class OAuth2GlobalMethodConfig extends GlobalMethodSecurityConfiguration 
         return new NgxUsersCallbackBaseServiceImpl();
     }
 
+
     private static class OAuth2AccessTokenVariable {
         private static final String AUTHENTICATION = "Authorization";
     }
