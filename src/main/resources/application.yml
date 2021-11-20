@@ -2,3 +2,7 @@ spring:
   profiles:
     active: dev
     include: ${spring.profiles.active}, common, params, mail, geo, no-handler
+  application:
+    admin:
+      enabled: true
+      jmx-name: org.springframework.boot:type=Admin,name=SpringApplication # JMX name of the application admin MBean.
