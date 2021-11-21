@@ -165,10 +165,10 @@ dependencies {
     /* begin::Support SMS */
 
     /*
-     - compile files('libs/SIVACore.jar')
-     - compile files('../OS-Sivaos-Core/build/libs/SIVACore.jar')
+     - compile files('libs/ngx-blobs-core.jar')
+     - compile files('../ngx-blobs-commons/build/libs/ngx-blobs-core.jar')
      */
-    compile files('../OS-Sivaos-Core/build/libs/SIVACore.jar')
+    compile files('../ngx-blobs-commons/build/libs/ngx-blobs-core.jar')
     compile files('../ngx-blobs-srv/build/libs/ngx-blobs-srv-1.0.0.jar')
 }
 /* end::Dependencies */
