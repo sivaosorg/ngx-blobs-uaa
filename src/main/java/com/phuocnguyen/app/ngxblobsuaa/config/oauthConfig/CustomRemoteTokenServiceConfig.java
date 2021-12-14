@@ -15,20 +15,19 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
+@SuppressWarnings({"FieldCanBeLocal", "SpringJavaAutowiredMembersInspection"})
 public class CustomRemoteTokenServiceConfig implements ResourceServerTokenServices {
 
-    SIVAOSAuthenticationServiceImplement sivaosAuthenticationService;
+    private SIVAOSAuthenticationServiceImplement sivaosAuthenticationService;
+    private final RestOperations restOperations;
     @Value("${spring.profiles.active}")
     private String profileActives;
-    private RestOperations restOperations;
 
-    /**
-     * - Ignore error code 400
-     */
     @Autowired
     public CustomRemoteTokenServiceConfig() {
         restOperations = new RestTemplate();
         ((RestTemplate) restOperations).setErrorHandler(new DefaultResponseErrorHandler() {
+            @SuppressWarnings("NullableProblems")
             @Override
             public void handleError(ClientHttpResponse response) throws IOException {
                 if (response.getRawStatusCode() != 400) {
