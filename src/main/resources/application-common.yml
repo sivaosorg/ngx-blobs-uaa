@@ -12,6 +12,7 @@ server:
 spring:
   main:
     banner-mode: log
+    allow-bean-definition-overriding: true
   output:
     ansi:
       enabled: always
