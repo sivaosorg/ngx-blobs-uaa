@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "sivaos.cache.callbacks.user-details.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Description for sivaos.cache.callbacks.user-details.enabled."
+    },
+    {
+      "name": "sivaos.cache.key-master",
+      "type": "java.lang.String",
+      "description": "Description for sivaos.cache.key-master."
+    }
+  ]
+}

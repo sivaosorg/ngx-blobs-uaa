@@ -19,6 +19,7 @@ spring:
     host: 127.0.0.1
     password: sivaospassword
     port: 6379
+    timeout: 10000
     sentinel:
       master:
         name: sivaos

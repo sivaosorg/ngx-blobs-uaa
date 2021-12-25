@@ -1,12 +1,11 @@
 package com.phuocnguyen.app.ngxblobsuaa.controller;
 
 import com.phuocnguyen.app.ngxblobssrv.controllers.NgxBaseController;
-import com.phuocnguyen.app.ngxblobsuaa.NgxBlobsUaaApplication;
+import com.phuocnguyen.app.ngxblobssrv.model.filter.UsersFilter;
+import com.phuocnguyen.app.ngxblobsuaa.service.UsersUaaService;
 import com.sivaos.Model.Response.SIVAResponseDTO;
-import com.sivaos.Utils.LoggerUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,47 +22,33 @@ import static com.ngxsivaos.variable.RoutesApiVariable.ROUTES_API_USER_SELF;
 @RequestMapping(value = ROUTES_API_USER_SELF)
 public class UsersSelfController extends NgxBaseController {
 
-    private ApplicationContext applicationContext;
+    private final UsersUaaService usersUaaService;
 
     @Value("${spring.profiles.active}")
     private String profileActive;
 
+    @Autowired
+    public UsersSelfController(
+            UsersUaaService usersUaaService) {
+        this.usersUaaService = usersUaaService;
+    }
+
     @PostConstruct
     public void init() {
         this.setActiveSessionInfo(true);
-        this.setActiveUserPrincipal(false);
+        this.setActiveUserPrincipal(true);
         this.setProfile(profileActive);
-    }
-
-    @SuppressWarnings("SameParameterValue")
-    private void initiateAppShutdown(int returnCode) {
-        SpringApplication.exit(applicationContext, () -> returnCode);
     }
 
     @GetMapping("/info")
     public @ResponseBody
     ResponseEntity<?> findSelfInfo() {
-        logger.info("Users request: {}, has permission: {}",
-                LoggerUtils.toJson(userRequest),
-                LoggerUtils.toJson(this.userRequest.getPrivileges()));
-        return new ResponseEntity<>(SIVAResponseDTO.buildSIVAResponse(userRequest), HttpStatus.OK);
+        UsersFilter usersFilter = new UsersFilter();
+        usersFilter.setPageIndex(1);
+        usersFilter.setPageSize(1);
+        usersFilter.setUsername(this.usernameAccess);
+        return new ResponseEntity<>(SIVAResponseDTO.buildSIVAResponse(usersUaaService.findUserBy(usersFilter)), HttpStatus.OK);
     }
 
-    @GetMapping("/restart")
-    void restart2() {
-        Thread restartThread = new Thread(() -> {
-            try {
-                Thread.sleep(5000);
-                NgxBlobsUaaApplication.restart();
-            } catch (InterruptedException ignored) {
-            }
-        });
-        restartThread.setDaemon(false);
-        restartThread.start();
-    }
 
-    @RequestMapping("/shutdown")
-    public void shutdown() {
-        initiateAppShutdown(0);
-    }
 }

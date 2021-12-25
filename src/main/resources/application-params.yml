@@ -17,3 +17,8 @@ sivaos:
     host: "localhost:8083"
     protocol: "http://"
     enable: true
+  cache:
+    key-master: uaa
+    callbacks:
+      user-details:
+        enabled: true

@@ -170,6 +170,7 @@ dependencies {
      */
     compile files('../ngx-blobs-commons/build/libs/ngx-blobs-core.jar')
     compile files('../ngx-blobs-srv/build/libs/ngx-blobs-srv-1.0.0.jar')
+    implementation files('../ngx-blobs-cache/build/libs/ngx-blobs-cache-1.0.0.jar')
 }
 /* end::Dependencies */
 
