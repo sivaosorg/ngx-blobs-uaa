@@ -9,7 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(
         basePackages = {
                 "com.phuocnguyen.app.ngxblobsuaa",
-                "com.phuocnguyen.app.ngxblobscache"
+                "com.phuocnguyen.app.ngxblobscache",
+                "com.phuocnguyen.app.ngxblobso2jwt"
         }
 )
 public class NgxBlobsUaaApplication {
