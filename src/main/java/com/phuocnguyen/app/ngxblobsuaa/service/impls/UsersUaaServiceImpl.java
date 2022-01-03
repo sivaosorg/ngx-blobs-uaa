@@ -64,6 +64,7 @@ public class UsersUaaServiceImpl implements UsersUaaService {
     public UserDTO findUserBy(UsersFilter usersFilter) {
         usersFilter.setViewParentsSessions(true);
         usersFilter.setSizeOfSessions(1);
+        usersFilter.setViewParentsSysModulePerms(true);
         String key = String.format("%s:%s", keyMasterRedis, RedisKeys.getLoginKey(usersFilter.getUsername()));
         UserDTO user;
 
@@ -80,7 +81,7 @@ public class UsersUaaServiceImpl implements UsersUaaService {
 
         if (enableCallbacksUserDetails) {
             if (ObjectUtils.allNotNull(user)) {
-                ngxRedisBaseService.setCacheObject(redisTemplate, key, LoggerUtils.parseObsToStrUsingGson(user), 5, TimeUnit.MINUTES);
+                ngxRedisBaseService.setCacheObject(redisTemplate, key, LoggerUtils.parseObsToStrUsingGson(user), 3, TimeUnit.MINUTES);
             }
         }
 

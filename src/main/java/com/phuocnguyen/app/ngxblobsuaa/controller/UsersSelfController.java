@@ -47,6 +47,7 @@ public class UsersSelfController extends NgxBaseController {
         usersFilter.setPageIndex(1);
         usersFilter.setPageSize(1);
         usersFilter.setUsername(this.usernameAccess);
+        usersFilter.setViewParentsSysModulePerms(true);
         return new ResponseEntity<>(SIVAResponseDTO.buildSIVAResponse(usersUaaService.findUserBy(usersFilter)), HttpStatus.OK);
     }
 

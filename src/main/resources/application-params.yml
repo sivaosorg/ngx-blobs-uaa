@@ -21,4 +21,4 @@ sivaos:
     key-master: uaa
     callbacks:
       user-details:
-        enabled: true
+        enabled: false
