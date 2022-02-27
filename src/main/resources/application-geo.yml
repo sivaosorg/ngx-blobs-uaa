@@ -1,7 +1,7 @@
-#spring:
-#  config:
-#    additional-location: spring-configuration-metadata.json
-#    location: vn
+# ////////////////////////////
+# Config Geolocation Attributes
+# ////////////////////////////
+---
 spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss

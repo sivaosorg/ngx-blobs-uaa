@@ -49,6 +49,6 @@ public class AppConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        logger.info("SIVAOS starting...auto generate....");
+        logger.info("NgxBlobsUaa starting...auto generate....");
     }
 }

@@ -1,4 +1,28 @@
-# Port
+# ////////////////////////////
+# Config Logging Global Information
+# ////////////////////////////
+---
+logging:
+  level:
+    root: INFO
+    org:
+      hibernate:
+        SQL: DEBUG
+        type: TRACE
+      springframework:
+        web: DEBUG
+  file:
+    max-size: 2MB
+    total-size-cap: 10MB
+    max-history: 30
+    clean-history-on-start: false
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%"
+
+# ////////////////////////////
+# Config Spring Servlet Information
+# ////////////////////////////
+---
 server:
   port: 8085
   tomcat:
@@ -8,12 +32,24 @@ server:
       charset: UTF-8
       enabled: true
       force: true
-# JDBC
+
+# ////////////////////////////
+# Config Ngx SivaOs Org Information
+# ////////////////////////////
+---
+sivaos:
+  parts:
+    upload-dir: roots
+
+# ////////////////////////////
+# Config Spring Information
+# ////////////////////////////
+---
 spring:
   application:
     admin:
       enabled: true
-      jmx-name: org.springframework.boot:type=Admin,name=SpringApplication # JMX name of the application admin MBean.
+      jmx-name: org.springframework.boot:type=Admin,name=SpringApplication
   main:
     banner-mode: log
     allow-bean-definition-overriding: true
@@ -42,7 +78,7 @@ spring:
     couchbase:
       expiration: 846000
     cache-names: sivaos-cache-dev, sivaos-cache-local, sivaos-cache-prod
-    redis: # allows setting up TTL for the all caches to same value.
+    redis:
       time-to-live: 60000
       cache-null-values: true
       time-expiry-hours: 23
@@ -54,27 +90,7 @@ spring:
       max-file-size: 4GB
       max-request-size: 30MB
       file-size-threshold: 2KB
-  # Mail
   mail:
     host: smtp.gmail.com
     port: 587
 
-sivaos:
-  parts:
-    upload-dir: roots
-logging:
-  level:
-    root: INFO
-    org:
-      hibernate:
-        SQL: DEBUG
-        type: TRACE
-      springframework:
-        web: DEBUG
-  file:
-    max-size: 2MB # Max log file size
-    total-size-cap: 10MB # Total size of log files
-    max-history: 30 # Log files max history
-    clean-history-on-start: false # Clean history on start
-  pattern:
-    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%"

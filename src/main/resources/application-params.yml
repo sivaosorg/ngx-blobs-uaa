@@ -1,8 +1,8 @@
+# ////////////////////////////
+# Config Params Attributes
+# ////////////////////////////
+---
 sivaos:
-  app: ngx-blobs-uaa
-  app-build: buildNgxBlobsUaa
-  app-run: RUN_NGX_BLOBS_UAA
-  app-jar: ngx-blobs-uaa
   swagger:
     description: API reference for developers
     contact-name: sivaos
@@ -22,3 +22,15 @@ sivaos:
     callbacks:
       user-details:
         enabled: false
+
+# ////////////////////////////
+# Config Kafka Attributes
+# ////////////////////////////
+---
+spring:
+  kafka:
+    enable-ssl: false
+    sasl:
+      enabled: false
+    producer:
+      enable-deep-config: false
