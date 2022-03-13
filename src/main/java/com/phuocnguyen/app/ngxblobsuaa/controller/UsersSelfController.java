@@ -35,8 +35,8 @@ public class UsersSelfController extends NgxBaseController {
 
     @PostConstruct
     public void init() {
-        this.setActiveSessionInfo(true);
-        this.setActiveUserPrincipal(true);
+        this.setActiveSessionInfo(false);
+        this.setActiveUserPrincipal(false);
         this.setProfile(profileActive);
     }
 

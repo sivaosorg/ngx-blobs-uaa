@@ -35,7 +35,7 @@ public class UsersUaaServiceImpl implements UsersUaaService {
     private final NgxRedisBaseService ngxRedisBaseService;
     private final RedisTemplate<String, Object> redisTemplate;
 
-    @Value("${sivaos.cache.callbacks.user-details.enabled}")
+    @Value("${sivaos.cache.callbacks.user-details.enabled:false}")
     private boolean enableCallbacksUserDetails;
 
     @Value("${sivaos.cache.key-master}")
@@ -63,7 +63,7 @@ public class UsersUaaServiceImpl implements UsersUaaService {
     @Override
     public UserDTO findUserBy(UsersFilter usersFilter) {
         usersFilter.setViewParentsSessions(true);
-        usersFilter.setSizeOfSessions(1);
+        usersFilter.setSizeOfSessions(2);
         usersFilter.setViewParentsSysModulePerms(true);
         String key = String.format("%s:%s", keyMasterRedis, RedisKeys.getLoginKey(usersFilter.getUsername()));
         UserDTO user;

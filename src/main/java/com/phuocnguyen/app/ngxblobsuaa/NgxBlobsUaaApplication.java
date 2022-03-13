@@ -5,12 +5,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
+@SuppressWarnings("SpellCheckingInspection")
 @SpringBootApplication
 @ComponentScan(
         basePackages = {
                 "com.phuocnguyen.app.ngxblobsuaa",
                 "com.phuocnguyen.app.ngxblobscache",
-                "com.phuocnguyen.app.ngxblobso2jwt"
+                "com.phuocnguyen.app.ngxblobso2jwt",
+                "com.phuocnguyen.app.ngxblobsadvice"
         }
 )
 public class NgxBlobsUaaApplication {
