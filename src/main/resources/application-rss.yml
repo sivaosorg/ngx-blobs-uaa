@@ -1,0 +1,24 @@
+spring:
+  resource-server-starter:
+    enabled: true
+    resource-id: product-api
+    endpoints-permitted:
+      - enabled: true
+        endpoint-short-url: '/swagger-ui.html'
+        endpoint-description: API list all endpoints via swagger
+      - enabled: true
+        endpoint-short-url: '/publish/event/**'
+        endpoint-description: Uri websocket to publish event
+      - enabled: true
+        endpoint-short-url: '/api/v1/users/sign-in'
+        endpoint-description: API Sign in System
+    endpoints-denied:
+      - enabled: true
+        endpoint-short-url: '/api/v1/admin/**'
+        endpoint-description: API admin
+      - enabled: false
+        endpoint-short-url: '/api/v1/configs/**'
+        endpoint-description: API configs system
+      - enabled: false
+        endpoint-short-url: '/api/v2/users/sign-in'
+        endpoint-description: API Sign in System
