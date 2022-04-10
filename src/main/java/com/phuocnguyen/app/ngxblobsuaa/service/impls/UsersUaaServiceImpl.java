@@ -1,20 +1,21 @@
 package com.phuocnguyen.app.ngxblobsuaa.service.impls;
 
+import com.ngxsivaos.model.enums.GeolocationType;
+import com.ngxsivaos.model.enums.RedisPropsType;
+import com.ngxsivaos.model.enums.RedisStylesType;
+import com.ngxsivaos.model.request.RedisStylesRequest;
 import com.phuocnguyen.app.ngxblobssrv.model.filter.UsersFilter;
-import com.phuocnguyen.app.ngxblobssrv.service.NgxRedisBaseService;
+import com.phuocnguyen.app.ngxblobssrv.service.NgxRedisStylesBaseService;
 import com.phuocnguyen.app.ngxblobssrv.service.NgxUsersDetailsBaseService;
 import com.phuocnguyen.app.ngxblobsuaa.service.UsersUaaService;
-import com.sivaos.Configurer.RedisConfigurer.Utils.RedisKeys;
 import com.sivaos.Model.UserDTO;
 import com.sivaos.Utility.CollectionsUtility;
 import com.sivaos.Utility.StringUtility;
-import com.sivaos.Utils.LoggerUtils;
 import com.sivaos.Utils.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,14 +32,14 @@ public class UsersUaaServiceImpl implements UsersUaaService {
 
     private static final Logger logger = LoggerFactory.getLogger(UsersUaaServiceImpl.class);
 
+    private static final Integer KEY_USER_LIVE_TIMEOUT = 3; // 3 minutes
     private final NgxUsersDetailsBaseService ngxUsersDetailsBaseService;
-    private final NgxRedisBaseService ngxRedisBaseService;
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final NgxRedisStylesBaseService ngxRedisStylesBaseService;
 
     @Value("${sivaos.cache.callbacks.user-details.enabled:false}")
     private boolean enableCallbacksUserDetails;
 
-    @Value("${sivaos.cache.key-master}")
+    @Value("${sivaos.cache.key-master:uaa}")
     private String keyMasterRedis;
 
     @PersistenceContext
@@ -47,11 +48,10 @@ public class UsersUaaServiceImpl implements UsersUaaService {
     @Autowired
     public UsersUaaServiceImpl(
             NgxUsersDetailsBaseService ngxUsersDetailsBaseService,
-            NgxRedisBaseService ngxRedisBaseService,
-            RedisTemplate<String, Object> redisTemplate) {
+            NgxRedisStylesBaseService ngxRedisStylesBaseService
+    ) {
         this.ngxUsersDetailsBaseService = ngxUsersDetailsBaseService;
-        this.ngxRedisBaseService = ngxRedisBaseService;
-        this.redisTemplate = redisTemplate;
+        this.ngxRedisStylesBaseService = ngxRedisStylesBaseService;
     }
 
     @PostConstruct
@@ -62,15 +62,22 @@ public class UsersUaaServiceImpl implements UsersUaaService {
 
     @Override
     public UserDTO findUserBy(UsersFilter usersFilter) {
+        RedisStylesRequest redisStylesRequest = new RedisStylesRequest();
+        UserDTO user;
+
         usersFilter.setViewParentsSessions(true);
         usersFilter.setSizeOfSessions(2);
         usersFilter.setViewParentsSysModulePerms(true);
-        String key = String.format("%s:%s", keyMasterRedis, RedisKeys.getLoginKey(usersFilter.getUsername()));
-        UserDTO user;
+
+        redisStylesRequest.setMasterKey(keyMasterRedis);
+        redisStylesRequest.setRedisKey(usersFilter.getUsername());
+        redisStylesRequest.setRedisStylesType(RedisStylesType.LOGIN_KEY);
+        redisStylesRequest.setGeolocationType(GeolocationType.VIETNAM_GEOLOCATION);
+        redisStylesRequest.setRedisPropsType(RedisPropsType.ObjectType);
+
 
         if (enableCallbacksUserDetails) {
-            String userDetailsCached = ngxRedisBaseService.getCacheObject(redisTemplate, key);
-            user = LoggerUtils.parseStrToObs(userDetailsCached, UserDTO.class);
+            user = ngxRedisStylesBaseService.getCacheObject(redisStylesRequest);
             if (ObjectUtils.allNotNull(user)) {
                 return user;
             }
@@ -81,7 +88,7 @@ public class UsersUaaServiceImpl implements UsersUaaService {
 
         if (enableCallbacksUserDetails) {
             if (ObjectUtils.allNotNull(user)) {
-                ngxRedisBaseService.setCacheObject(redisTemplate, key, LoggerUtils.parseObsToStrUsingGson(user), 3, TimeUnit.MINUTES);
+                ngxRedisStylesBaseService.setCacheObject(redisStylesRequest, user, KEY_USER_LIVE_TIMEOUT, TimeUnit.MINUTES);
             }
         }
 

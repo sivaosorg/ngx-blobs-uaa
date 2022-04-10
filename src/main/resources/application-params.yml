@@ -34,3 +34,11 @@ spring:
       enabled: false
     producer:
       enable-deep-config: false
+
+# ////////////////////////////
+# Config 3rd Ally Attributes
+# ////////////////////////////
+---
+spring:
+  resource-server-callback-starter:
+    enabled: false # enable to check token from authorization server (url)
