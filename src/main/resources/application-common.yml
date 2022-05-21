@@ -58,7 +58,7 @@ spring:
       enabled: always
   jpa:
     generate-ddl: true
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: update
     properties:
