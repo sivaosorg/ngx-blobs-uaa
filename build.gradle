@@ -61,7 +61,7 @@ dependencies {
 
     /* begin::Support Make Request */
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.12'
-    implementation group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
+    implementation group: 'com.konghq', name: 'unirest-java', version: '3.13.10'
     /* end::Support Make Request */
 
 
