@@ -8,8 +8,8 @@ spring:
     time-zone: Asia/Ho_Chi_Minh
 sivaos:
   geo:
-    date-format: yyyy-MM-dd HH:mm:ss
-    time-zone: Asia/Ho_Chi_Minh
+    date-format: ${spring.jackson.date-format}
+    time-zone: ${spring.jackson.time-zone}
     status: running
     name: vn
 

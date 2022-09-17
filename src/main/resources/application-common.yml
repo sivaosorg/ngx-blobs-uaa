@@ -33,13 +33,6 @@ server:
       enabled: true
       force: true
 
-# ////////////////////////////
-# Config Ngx SivaOs Org Information
-# ////////////////////////////
----
-sivaos:
-  parts:
-    upload-dir: roots
 
 # ////////////////////////////
 # Config Spring Information
@@ -68,22 +61,6 @@ spring:
           characterEncoding: utf-8
           CharSet: utf-8
           useUnicode: true
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          jwk-set-uri: jwtSIVASecretKey
-          jws-algorithm: RS256
-  cache:
-    couchbase:
-      expiration: 846000
-    cache-names: sivaos-cache-dev, sivaos-cache-local, sivaos-cache-prod
-    redis:
-      time-to-live: 60000
-      cache-null-values: true
-      time-expiry-hours: 23
-      time-expiry-minutes: 59
-      time-expiry-seconds: 59
   servlet:
     multipart:
       enabled: true

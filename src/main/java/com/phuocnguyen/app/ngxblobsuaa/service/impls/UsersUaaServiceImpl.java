@@ -75,11 +75,12 @@ public class UsersUaaServiceImpl implements UsersUaaService {
         redisStylesRequest.setGeolocationType(GeolocationType.VIETNAM_GEOLOCATION);
         redisStylesRequest.setRedisPropsType(RedisPropsType.ObjectType);
 
-
         if (enableCallbacksUserDetails) {
-            user = ngxRedisStylesBaseService.getCacheObject(redisStylesRequest);
-            if (ObjectUtils.allNotNull(user)) {
-                return user;
+            if (ngxRedisStylesBaseService.isAvailable()) {
+                user = ngxRedisStylesBaseService.getCacheObject(redisStylesRequest);
+                if (ObjectUtils.allNotNull(user)) {
+                    return user;
+                }
             }
         }
 
@@ -87,8 +88,10 @@ public class UsersUaaServiceImpl implements UsersUaaService {
         user = CollectionsUtility.isNotEmpty(users) ? users.get(0) : null;
 
         if (enableCallbacksUserDetails) {
-            if (ObjectUtils.allNotNull(user)) {
-                ngxRedisStylesBaseService.setCacheObject(redisStylesRequest, user, KEY_USER_LIVE_TIMEOUT, TimeUnit.MINUTES);
+            if (ngxRedisStylesBaseService.isAvailable()) {
+                if (ObjectUtils.allNotNull(user)) {
+                    ngxRedisStylesBaseService.setCacheObject(redisStylesRequest, user, KEY_USER_LIVE_TIMEOUT, TimeUnit.MINUTES);
+                }
             }
         }
 

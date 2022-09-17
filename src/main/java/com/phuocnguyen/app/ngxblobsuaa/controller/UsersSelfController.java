@@ -24,7 +24,7 @@ public class UsersSelfController extends NgxBaseController {
     private final UsersUaaService usersUaaService;
     private final SessionsService sessionsService;
 
-    @Value("${spring.profiles.active}")
+    @Value("${spring.profiles.active:dev}")
     private String profileActive;
 
     @Autowired

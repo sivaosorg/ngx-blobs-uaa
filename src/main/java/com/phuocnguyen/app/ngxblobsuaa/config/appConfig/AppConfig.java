@@ -26,7 +26,7 @@ public class AppConfig implements CommandLineRunner {
     private final ApplicationContext applicationContext;
 
 
-    @Value("${spring.profiles.active}")
+    @Value("${spring.profiles.active:dev}")
     private String profileActive;
 
     @Autowired
@@ -49,6 +49,6 @@ public class AppConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        logger.info("NgxBlobsUaa starting...auto generate....");
+        logger.info("NgxBlobsUaa starting...completed");
     }
 }

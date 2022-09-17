@@ -5,9 +5,9 @@
 logging:
   pattern:
     console: "%clr(%d{yy-MM-dd E HH:mm:ss.SSS}){blue} %clr(%-5p) %clr(%logger{0}){blue} %clr(%m){faint}%n %yellow(%logger{15}) -> %msg%n"
-    rolling-file-name: logs/dev-sivaos-%d{yyyy-MM-dd}.%i.log
+    rolling-file-name: logs/ngx-blobs-uaa-local-%d{yyyy-MM-dd}.%i.log
   file:
-    name: "logs/dev-sivaos.log"
+    name: "logs/ngx-blobs-uaa-local.log"
 
 # ////////////////////////////
 # Config Party 3rd Attributes

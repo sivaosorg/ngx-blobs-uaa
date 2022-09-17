@@ -2,6 +2,7 @@ spring:
   resource-server-starter:
     enabled: true
     resource-id: product-api
+    jwt-key: ''
     endpoints-permitted:
       - enabled: true
         endpoint-short-url: '/swagger-ui.html'

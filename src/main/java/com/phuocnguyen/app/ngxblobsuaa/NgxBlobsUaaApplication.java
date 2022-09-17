@@ -15,12 +15,11 @@ import org.springframework.context.annotation.ComponentScan;
                 "com.phuocnguyen.app.ngxblobsadvice"
         }
 )
-public class NgxBlobsUaaApplication {
+public class NgxBlobsUaaApplication extends ServletInitializer {
 
     private static ConfigurableApplicationContext context;
 
     public static void main(String[] args) {
-        // SpringApplication.run(NgxBlobsUaaApplication.class, args);
         NgxBlobsUaaApplication.context = SpringApplication.run(NgxBlobsUaaApplication.class, args);
     }
 
