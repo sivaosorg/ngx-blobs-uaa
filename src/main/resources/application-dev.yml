@@ -33,6 +33,7 @@ spring:
 # ////////////////////////////
 # Config Spring Attributes
 # ////////////////////////////
+# Database name: global_schema_oauth / ec_scm: system core management
 ---
 spring:
   datasource:

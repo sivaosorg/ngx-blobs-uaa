@@ -64,10 +64,14 @@ public class UsersUaaServiceImpl implements UsersUaaService {
     public UserDTO findUserBy(UsersFilter usersFilter) {
         RedisStylesRequest redisStylesRequest = new RedisStylesRequest();
         UserDTO user;
-
-        usersFilter.setViewParentsSessions(true);
+        
         usersFilter.setSizeOfSessions(2);
+        usersFilter.setViewParentsSessions(true);
         usersFilter.setViewParentsSysModulePerms(true);
+        usersFilter.setViewParentsGroupUsers(true);
+        usersFilter.setViewParentsUsersProperties(true);
+        usersFilter.setSizeOfRecordsUserProperties(2);
+
 
         redisStylesRequest.setMasterKey(keyMasterRedis);
         redisStylesRequest.setRedisKey(usersFilter.getUsername());
