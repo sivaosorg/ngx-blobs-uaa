@@ -1,4 +1,4 @@
 spring:
   profiles:
     active: dev
-    include: ${spring.profiles.active}, common, params, geo, no-handler, redis, rss
+    include: ${spring.profiles.active}, common, params, no-handler, redis, rss
