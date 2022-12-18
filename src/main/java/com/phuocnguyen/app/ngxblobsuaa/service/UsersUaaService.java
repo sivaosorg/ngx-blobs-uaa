@@ -5,5 +5,5 @@ import com.sivaos.Model.UserDTO;
 
 public interface UsersUaaService {
 
-    UserDTO findUserBy(UsersFilter usersFilter);
+    UserDTO findUserBy(UsersFilter filter);
 }

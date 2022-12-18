@@ -23,7 +23,7 @@ public class UsersCallbackController {
 
     @PostMapping("users")
     public @ResponseBody
-    ResponseEntity<?> findUser(@RequestBody UsersFilter usersFilter) {
-        return new ResponseEntity<>(usersUaaService.findUserBy(usersFilter), HttpStatus.OK);
+    ResponseEntity<?> findUser(@RequestBody UsersFilter filter) {
+        return new ResponseEntity<>(usersUaaService.findUserBy(filter), HttpStatus.OK);
     }
 }

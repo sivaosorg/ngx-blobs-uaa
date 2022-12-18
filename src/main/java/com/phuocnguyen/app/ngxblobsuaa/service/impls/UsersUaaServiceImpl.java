@@ -61,20 +61,20 @@ public class UsersUaaServiceImpl implements UsersUaaService {
     }
 
     @Override
-    public UserDTO findUserBy(UsersFilter usersFilter) {
+    public UserDTO findUserBy(UsersFilter filter) {
         RedisStylesRequest redisStylesRequest = new RedisStylesRequest();
         UserDTO user;
         
-        usersFilter.setSizeOfSessions(2);
-        usersFilter.setViewParentsSessions(true);
-        usersFilter.setViewParentsSysModulePerms(true);
-        usersFilter.setViewParentsGroupUsers(true);
-        usersFilter.setViewParentsUsersProperties(true);
-        usersFilter.setSizeOfRecordsUserProperties(2);
+        filter.setSizeOfSessions(2);
+        filter.setViewParentsSessions(true);
+        filter.setViewParentsSysModulePerms(true);
+        filter.setViewParentsGroupUsers(true);
+        filter.setViewParentsUsersProperties(true);
+        filter.setSizeOfRecordsUserProperties(2);
 
 
         redisStylesRequest.setMasterKey(keyMasterRedis);
-        redisStylesRequest.setRedisKey(usersFilter.getUsername());
+        redisStylesRequest.setRedisKey(filter.getUsername());
         redisStylesRequest.setRedisStylesType(RedisStylesType.LOGIN_KEY);
         redisStylesRequest.setGeolocationType(GeolocationType.VIETNAM_GEOLOCATION);
         redisStylesRequest.setRedisPropsType(RedisPropsType.ObjectType);
@@ -88,7 +88,7 @@ public class UsersUaaServiceImpl implements UsersUaaService {
             }
         }
 
-        List<UserDTO> users = ngxUsersDetailsBaseService.findUsersBy(usersFilter, entityManager);
+        List<UserDTO> users = ngxUsersDetailsBaseService.findUsersBy(filter, entityManager);
         user = CollectionsUtility.isNotEmpty(users) ? users.get(0) : null;
 
         if (enableCallbacksUserDetails) {
